@@ -7,23 +7,52 @@
         var getLiveTime  = function() {
             var liveTime = moment().format("LLLL");
             $("#currentDay").text(liveTime);
-
         };
-        getLiveTime()
-        var currentHour = moment().hour(); 
-        for (var hour = 9; hour <= 17; hour++) {
-          var timeblockId = "#hour-" + hour;
-          var timeBlockDiv  = document.querySelector(timeblockId)
-          if (currentHour === hour) {
-            timeBlockDiv.classList.add("present");
-          } else if (currentHour > hour) {
-            timeBlockDiv.classList.add("past");
-          } else {
+
+        /*--currentHour is a new variable for time from Moment.js formatted in military time so that
+        a for loop can be written from hour 9 (9am) through hour 17 (5pm).--*/
+          getLiveTime()
+          var currentHour = moment().hour(); 
+          for (var hour = 9; hour <= 17; hour++) {
+            var timeblockId = "#hour-" + hour;
+            var timeBlockDiv  = document.querySelector(timeblockId)
+            /*--within the for loop the value of the hour of each time block is compared to the value of 
+            current hour and a color, based on a class assignment in CSS, is added to the 
+            time block according to whether that value is equal to, greater than, or less than that of the current hour*/
+            if (currentHour === hour) {
+              timeBlockDiv.classList.add("present");
+            } else if (currentHour > hour) {
+              timeBlockDiv.classList.add("past");
+            } else {
             timeBlockDiv.classList.add("future");
+            }
           }
-      }
-      
 
       });
+
+      
+      
+      $(".saveBtn").on("click", function() {
+        event.preventDefault();
+        var textArea = this.parentNode;
+        console.log("thisisworking")
+        var text = textArea.childNodes[3]
+        var description = text.value
+        var container = textArea.id
+        text[container] = description
+
+        console.log(text[container])
+  
+
+        // var user = {
+          // description: descriptionInput.value.trim()
+
+        //  };
+      
+      localStorage.setItem("user", JSON.stringify(text));
+      })
+
+
+      
 
      
