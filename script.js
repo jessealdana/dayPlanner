@@ -1,7 +1,7 @@
       //write live timekeeping from Moment.js to the page by referencing the html div currentDay
+      
       $(document).ready(function() {
         //var a = moment().format();
-
         console.log("hello");
   
         var getLiveTime  = function() {
@@ -11,9 +11,9 @@
 
         /*--currentHour is a new variable for time from Moment.js formatted in military time so that
         a for loop can be written from hour 9 (9am) through hour 17 (5pm).--*/
-          getLiveTime()
-          var currentHour = moment().hour(); 
-          for (var hour = 9; hour <= 17; hour++) {
+        getLiveTime()
+        var currentHour = moment().hour(); 
+        for (var hour = 9; hour <= 17; hour++) {
             var timeblockId = "#hour-" + hour;
             var timeBlockDiv  = document.querySelector(timeblockId)
             /*--within the for loop the value of the hour of each time block is compared to the value of 
@@ -30,12 +30,12 @@
 
       });
 
-      
+      //when the user clicks save the text input area in each row is targeted
       
       $(".saveBtn").on("click", function() {
         event.preventDefault();
         var textArea = this.parentNode;
-        console.log("thisisworking")
+        console.log("targetacquired")
         var text = textArea.childNodes[3]
         var description = text.value
         var container = textArea.id
@@ -43,13 +43,11 @@
 
         console.log(text[container])
   
-
-        // var user = {
-          // description: descriptionInput.value.trim()
-
-        //  };
-      
-      localStorage.setItem("user", JSON.stringify(text));
+        //the user input is saved to local storage
+        var user = JSON.stringify(text);
+        window.localStorage.setItem("text", user);
+        var lastUser = JSON.parse(window.localStorage.getItem("text"));
+        return(lastUser);
       })
 
 
